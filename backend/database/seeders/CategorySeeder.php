@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) { // Génère 10 catégories
+        for ($i = 0; $i < 10; $i++) {
             DB::table('categories')->insert([
                 'name' => $faker->word,
                 'image' => 'https://cdn-icons-png.flaticon.com/512/3502/3502688.png',
