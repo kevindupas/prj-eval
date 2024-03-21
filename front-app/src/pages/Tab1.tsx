@@ -38,7 +38,7 @@ const Tab1: React.FC = () => {
           {products &&
             products.map((item: { image: string | undefined; name: string }, index: Key | null | undefined) => (
               <div>
-                <h1>{item.name}</h1>
+                <h1 className='text-red-500 bg-yellow-200'>{item.name}</h1>
                 <img key={index} src={item.image} alt='image' width={100} />
               </div>
             ))}
