@@ -22,9 +22,18 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'image' => 'required',
-            'description' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Le nom est requis',
+            'image.required' => 'Une image est requise',
+            'description.required' => 'Une desription est requise',
         ];
     }
 }

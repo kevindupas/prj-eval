@@ -65,7 +65,7 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->description = $request->input('description');
 
-        if ($request->hasFile('iamge') && $request->file('image')->isValid()) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Supprime l'image existante
             Storage::disk('public')->delete(str_replace('/storage', '', $category->image));
 
@@ -79,7 +79,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('admin.poi-categories.index')->with('message', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('message', 'Category updated successfully.');
     }
 
     public function destroy(Category $category)

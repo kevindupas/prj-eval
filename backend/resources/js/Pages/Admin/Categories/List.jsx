@@ -35,13 +35,13 @@ function List({ auth, categories }) {
                                 <div>
                                     <div className="-mt-px flex divide-x divide-gray-200">
                                         <div className="flex w-0 flex-1">
-                                            <a
-                                                href={`mailto:${item.name}`}
-                                                className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                                            <Link
+                                                href={route('categories.edit', { category: item.id })}
+                                                className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
                                             >
                                                 <PencilIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                                                 Editer
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="-ml-px flex w-0 flex-1">
                                             <Link
