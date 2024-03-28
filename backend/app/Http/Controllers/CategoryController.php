@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Str;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {

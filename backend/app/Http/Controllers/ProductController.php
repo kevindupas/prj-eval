@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Str;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -20,7 +22,14 @@ class ProductController extends Controller
     }
 
     public function create() {
-        return Inertia::render('Admin/Products/Create');
+
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        return Inertia::render('Admin/Products/Create', [
+            'categories' => $categories,
+            'brands' => $brands
+        ]);
     }
 
 
@@ -30,6 +39,7 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->label = $request->input('label');
+        $product->brand_id = $request->input('brand_id');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -38,6 +48,9 @@ class ProductController extends Controller
             $image->storeAs('public', 'images/products/' . $imageName);
             $product->image = '/storage/images/products/' . $imageName;
         }
+
+        $categoriesIds = $request->input('categories');
+        $product->categories()->sync($categoriesIds);
 
         $product->save();
 
@@ -49,8 +62,14 @@ class ProductController extends Controller
     }
 
     public function edit(Product $product) {
+
+        $categories = Category::all();
+        $brands = Brand::all();
+
         return Inertia::render('Admin/Products/Edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories,
+            'brands' => $brands
         ]);
     }
 
@@ -72,6 +91,9 @@ class ProductController extends Controller
             $image->storeAs('public', 'images/products/' . $imageName);
             $product->image = '/storage/images/products/' . $imageName;
         }
+
+        $categoriesIds = $request->input('categories');
+        $product->categories()->sync($categoriesIds);
 
         $product->save();
 
